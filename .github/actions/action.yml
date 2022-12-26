@@ -1,0 +1,11 @@
+name: 'Run Paddle'
+description: 'Runs Paddle build system within Docker container'
+inputs:
+  task: # id of input
+    description: 'Paddle Task ID'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.task }}

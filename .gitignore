@@ -1,0 +1,7 @@
+.idea/
+
+*.venv
+*.iml
+
+paddle.auth.yaml
+**/.paddle/**

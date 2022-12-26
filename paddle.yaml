@@ -1,0 +1,30 @@
+project: paddle-example
+
+# it is only needed to specify metadata here, and propagate it later to all subprojects
+plugins:
+  enabled:
+    - python
+
+metadata:
+  version: 0.0.1
+  author: Oleg Smirnov
+  authorEmail: oleg.smirnov@jetbrains.com
+  url: jetbrains.com
+
+subprojects:
+  - paddle_example_root
+  - paddle_example_dependency
+
+environment:
+  path: .venv
+  python: 3.9
+
+# FIXME: configuration with <all> is not working in Docker at the moment somehow O_o
+#  all:
+#    repositories:
+#      - name: test-pypi
+#        url: https://packages.jetbrains.team/pypi/p/paddle/test-pypi/simple
+#        uploadUrl: https://packages.jetbrains.team/pypi/p/paddle/test-pypi/legacy/
+#        authEnv:
+#          username: JB_SPACE_CLIENT_ID
+#          password: JB_SPACE_CLIENT_SECRET

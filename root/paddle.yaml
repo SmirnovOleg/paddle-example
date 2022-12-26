@@ -1,0 +1,60 @@
+project: paddle_example_root
+
+roots:
+  sources: src
+  tests: test
+  dist: dist
+
+plugins:
+  enabled:
+    - python
+
+subprojects:
+  - paddle_example_dependency
+
+environment:
+  path: .venv
+  python: 3.9
+
+repositories:
+  - name: test-pypi
+    url: https://packages.jetbrains.team/pypi/p/paddle/test-pypi/simple
+    uploadUrl: https://packages.jetbrains.team/pypi/p/paddle/test-pypi/legacy/
+    authEnv:
+      username: JB_SPACE_CLIENT_ID
+      password: JB_SPACE_CLIENT_SECRET
+
+requirements:
+  dev:
+    - name: pytest
+      version: ==7.1.2
+    - name: pylint
+      version: ==2.14.4
+    - name: mypy
+      version: ==0.961
+    - name: twine
+      version: ==4.0.1
+    - name: wheel
+      version: ==0.37.1
+
+tasks:
+  run:
+    - id: main
+      entrypoint: paddle_example_root/main.py
+    - id: main_as_module
+      entrypoint: paddle_example_root.main
+
+  publish:
+    repo: test-pypi
+    twine:
+      skipExisting: True
+      verbose: True
+
+  test:
+    pytest:
+      - id: some_tests
+        targets: # if targets are not provided, Paddle runs all test from tests root
+          - bar/test_app.py::TestFoo::test_that
+          - test_example.py
+        keywords: "not this"
+        parameters: ""

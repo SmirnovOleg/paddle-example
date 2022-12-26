@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: 'Run Paddle test task'
-        uses: ./.github/actions
+        uses: ./
         with:
           task: ':paddle_example_root:some_tests'
 

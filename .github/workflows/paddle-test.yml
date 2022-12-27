@@ -3,14 +3,18 @@ name: test
 on: [ push, pull_request ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
+    env:
+      JB_SPACE_CLIENT_ID: ${{ secrets.JB_SPACE_CLIENT_ID }}
+      JB_SPACE_CLIENT_SECRET: ${{ secrets.JB_SPACE_CLIENT_SECRET }}
+
     steps:
       - name: 'Checkout'
         uses: actions/checkout@v2
 
-      - name: 'Run Paddle test task'
-        uses: ./
-        with:
-          task: ':paddle_example_root:some_tests'
+      - name: 'Build Docker image'
+        run: docker build -t paddle-example --build-arg JB_SPACE_CLIENT_ID=$JB_SPACE_CLIENT_ID --build-arg JB_SPACE_CLIENT_SECRET=$JB_SPACE_CLIENT_SECRET .
 
+      - name: 'Run tests'
+        run: docker run paddle-example :paddle_example_root:some_tests

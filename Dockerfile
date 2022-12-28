@@ -1,4 +1,4 @@
-FROM registry.jetbrains.team/p/paddle/docker/paddle-py-3-9:0.4.6
+FROM registry.jetbrains.team/p/paddle/docker/paddle-py-3-9:0.4.7
 
 ARG JB_SPACE_CLIENT_ID
 ARG JB_SPACE_CLIENT_SECRET
